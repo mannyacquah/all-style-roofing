@@ -1,35 +1,50 @@
+// Language: default is 'de'
+let currentLang = 'de';
+
+const langSwitchNav = document.getElementById('langSwitchNav');
+const overlay = document.getElementById('navOverlay');
+const menuToggle = document.getElementById('menuToggle');
+const menuClose = document.getElementById('menuClose');
+
+// Toggle nav overlay
+function openNav() { overlay.classList.add('is-open'); document.body.style.overflow = 'hidden'; }
+function closeNav() { overlay.classList.remove('is-open'); document.body.style.overflow = ''; }
+
+menuToggle.addEventListener('click', openNav);
+menuClose.addEventListener('click', closeNav);
+
+// Close nav when clicking a link
+overlay.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', closeNav);
+});
+
+// Close on escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeNav();
+});
+
+// Close on backdrop click
+overlay.querySelector('.nav-overlay-backdrop').addEventListener('click', closeNav);
+
 // Language switching
-let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
 
-document.getElementById('langSwitch').addEventListener('click', () => {
-  currentLang = currentLang === 'en' ? 'de' : 'en';
-  document.getElementById('langSwitch').textContent = currentLang === 'en' ? 'DE' : 'EN';
-  document.documentElement.lang = currentLang;
+  // Update button text
+  langSwitchNav.textContent = lang === 'de' ? 'English' : 'Deutsch';
 
-  document.querySelectorAll('[data-en]').forEach(el => {
-    el.innerHTML = el.getAttribute(`data-${currentLang}`);
+  // Update all translatable elements
+  document.querySelectorAll('[data-de]').forEach(el => {
+    el.innerHTML = el.getAttribute(`data-${lang}`);
   });
 
-  document.querySelectorAll('[data-placeholder-en]').forEach(el => {
-    el.placeholder = el.getAttribute(`data-placeholder-${currentLang}`);
+  // Update placeholders
+  document.querySelectorAll('[data-placeholder-de]').forEach(el => {
+    el.placeholder = el.getAttribute(`data-placeholder-${lang}`);
   });
-});
+}
 
-// Mobile menu
-const toggle = document.getElementById('mobileToggle');
-const navLinks = document.getElementById('navLinks');
-toggle.addEventListener('click', () => {
-  toggle.classList.toggle('active');
-  navLinks.classList.toggle('active');
-});
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    toggle.classList.remove('active');
-    navLinks.classList.remove('active');
-  });
-});
-
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+langSwitchNav.addEventListener('click', () => {
+  setLang(currentLang === 'de' ? 'en' : 'de');
 });

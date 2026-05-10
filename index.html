@@ -1,161 +1,218 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de" class="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>All Style Roofing</title>
-  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <!-- Navigation -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="#" class="logo">All Style Roofing</a>
-      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
+<body class="bg-black text-white font-sans antialiased overflow-x-hidden">
+
+  <!-- Sticky Logo / Menu Toggle -->
+  <div class="sticky-logo" id="stickyLogo">
+    <button id="menuToggle" class="logo-btn" aria-label="Menu">
+      <span class="logo-text">All Style<br>Roofing</span>
+    </button>
+  </div>
+
+  <!-- Fullscreen Navigation Overlay -->
+  <div id="navOverlay" class="nav-overlay">
+    <div class="nav-overlay-backdrop"></div>
+    <div class="nav-overlay-content">
+      <button id="menuClose" class="logo-btn mb-8" aria-label="Close">
+        <span class="logo-text">All Style<br>Roofing</span>
       </button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#services" data-en="Services" data-de="Leistungen">Services</a></li>
-        <li><a href="#projects" data-en="Projects" data-de="Projekte">Projects</a></li>
-        <li><a href="#about" data-en="About Us" data-de="&Uuml;ber Uns">About Us</a></li>
-        <li><a href="#contact" data-en="Contact" data-de="Kontakt">Contact</a></li>
-        <li>
-          <button class="lang-switch" id="langSwitch">DE</button>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <header class="hero" id="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1 data-en="Premium Roofing &amp; Housing Solutions" data-de="Premium Dach- &amp; Wohnl&ouml;sungen">Premium Roofing & Housing Solutions</h1>
-      <p data-en="Quality craftsmanship for every home. Built to last, designed to impress." data-de="Qualit&auml;tsarbeit f&uuml;r jedes Zuhause. Gebaut f&uuml;r die Ewigkeit, gestaltet um zu beeindrucken.">Quality craftsmanship for every home. Built to last, designed to impress.</p>
-      <a href="#contact" class="btn" data-en="Get a Free Quote" data-de="Kostenloses Angebot">Get a Free Quote</a>
-    </div>
-  </header>
-
-  <!-- Services -->
-  <section class="services" id="services">
-    <div class="container">
-      <h2 data-en="Our Services" data-de="Unsere Leistungen">Our Services</h2>
-      <div class="services-grid">
-        <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1632759145351-1d592919f522?w=600&h=400&fit=crop" alt="Roof Installation" loading="lazy">
-          <h3 data-en="Roof Installation" data-de="Dachinstallation">Roof Installation</h3>
-          <p data-en="Complete new roof installations using premium materials and expert techniques." data-de="Komplette Neuinstallationen mit hochwertigen Materialien und fachgerechter Technik.">Complete new roof installations using premium materials and expert techniques.</p>
-        </div>
-        <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop" alt="Roof Repair" loading="lazy">
-          <h3 data-en="Roof Repair" data-de="Dachreparatur">Roof Repair</h3>
-          <p data-en="Fast, reliable repairs to protect your home from leaks and weather damage." data-de="Schnelle, zuverl&auml;ssige Reparaturen zum Schutz vor Undichtigkeiten und Wettersch&auml;den.">Fast, reliable repairs to protect your home from leaks and weather damage.</p>
-        </div>
-        <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop" alt="Housing Renovation" loading="lazy">
-          <h3 data-en="Housing Renovation" data-de="Hausrenovierung">Housing Renovation</h3>
-          <p data-en="Full-scale home renovations from foundation to rooftop, tailored to your vision." data-de="Komplettrenovierungen vom Fundament bis zum Dach, ganz nach Ihren W&uuml;nschen.">Full-scale home renovations from foundation to rooftop, tailored to your vision.</p>
-        </div>
-        <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop" alt="Inspection" loading="lazy">
-          <h3 data-en="Inspection &amp; Consulting" data-de="Inspektion &amp; Beratung">Inspection & Consulting</h3>
-          <p data-en="Thorough roof inspections and expert consulting to plan your next project." data-de="Gr&uuml;ndliche Dachinspektionen und fachkundige Beratung f&uuml;r Ihr n&auml;chstes Projekt.">Thorough roof inspections and expert consulting to plan your next project.</p>
-        </div>
+      <nav class="nav-menu">
+        <a href="#projects" class="nav-link" data-de="Projekte" data-en="Projects">Projekte</a>
+        <a href="#services" class="nav-link" data-de="Leistungen" data-en="Services">Leistungen</a>
+        <a href="#about" class="nav-link" data-de="&Uuml;ber Uns" data-en="About Us">&Uuml;ber Uns</a>
+        <a href="#contact" class="nav-link" data-de="Kontakt" data-en="Contact">Kontakt</a>
+        <button id="langSwitchNav" class="nav-link lang-link">English</button>
+      </nav>
+      <div class="nav-footer">
+        <a href="#contact" class="hover-scale" data-de="Impressum" data-en="Imprint">Impressum</a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Projects -->
-  <section class="projects" id="projects">
-    <div class="container">
-      <h2 data-en="Recent Projects" data-de="Aktuelle Projekte">Recent Projects</h2>
-      <div class="projects-grid">
+  <!-- Main Content -->
+  <main>
+
+    <!-- Hero / Title Card -->
+    <section class="px-4 md:px-6 mb-8 md:mb-12">
+      <div class="project-card hero-card">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=900&fit=crop" alt="Premium Roofing" class="card-img" loading="eager">
+        <div class="card-overlay"></div>
+        <div class="card-text">
+          <h1 class="card-title hero-title" data-de="Premium Dach- &amp; Wohnl&ouml;sungen" data-en="Premium Roofing &amp; Housing Solutions">Premium Dach- &amp; Wohnl&ouml;sungen</h1>
+          <p class="mt-4 text-base md:text-lg opacity-80 font-light" data-de="Qualit&auml;tsarbeit f&uuml;r jedes Zuhause." data-en="Quality craftsmanship for every home.">Qualit&auml;tsarbeit f&uuml;r jedes Zuhause.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section id="projects" class="px-4 md:px-6 mb-8 md:mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-[1200px] mx-auto">
+
+        <a href="#" class="project-card">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop" alt="Modern Villa" class="card-img" loading="lazy">
+          <div class="card-overlay"></div>
+          <div class="card-text">
+            <h2 class="card-title" data-de="Moderne Villa Bedachung" data-en="Modern Villa Roofing">Moderne Villa Bedachung</h2>
+            <span class="card-tag" data-de="Wohnbau" data-en="Residential">Wohnbau</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card">
+          <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&h=600&fit=crop" alt="Luxury Renovation" class="card-img" loading="lazy">
+          <div class="card-overlay"></div>
+          <div class="card-text">
+            <h2 class="card-title" data-de="Luxushaus Renovierung" data-en="Luxury Home Renovation">Luxushaus Renovierung</h2>
+            <span class="card-tag" data-de="Renovierung" data-en="Renovation">Renovierung</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card">
+          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop" alt="Suburban Roof" class="card-img" loading="lazy">
+          <div class="card-overlay"></div>
+          <div class="card-text">
+            <h2 class="card-title" data-de="Vorstadtdach Erneuerung" data-en="Suburban Roof Replacement">Vorstadtdach Erneuerung</h2>
+            <span class="card-tag" data-de="Erneuerung" data-en="Replacement">Erneuerung</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card">
+          <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&h=600&fit=crop" alt="Estate Restoration" class="card-img" loading="lazy">
+          <div class="card-overlay"></div>
+          <div class="card-text">
+            <h2 class="card-title" data-de="Landsitz Restaurierung" data-en="Country Estate Restoration">Landsitz Restaurierung</h2>
+            <span class="card-tag" data-de="Restaurierung" data-en="Restoration">Restaurierung</span>
+          </div>
+        </a>
+
+        <a href="#" class="project-card md:col-span-2">
+          <img src="https://images.unsplash.com/photo-1632759145351-1d592919f522?w=1600&h=600&fit=crop" alt="Roof Installation" class="card-img" loading="lazy">
+          <div class="card-overlay"></div>
+          <div class="card-text">
+            <h2 class="card-title" data-de="Gewerbliche Dachinstallation" data-en="Commercial Roof Installation">Gewerbliche Dachinstallation</h2>
+            <span class="card-tag" data-de="Gewerbe" data-en="Commercial">Gewerbe</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="px-4 md:px-6 mb-8 md:mb-12">
+      <div class="max-w-[1200px] mx-auto">
+        <div class="project-card service-banner">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&h=700&fit=crop" alt="Services" class="card-img" loading="lazy">
+          <div class="card-overlay dark-overlay"></div>
+          <div class="card-text">
+            <h2 class="card-title hero-title mb-8 md:mb-12" data-de="Unsere Leistungen" data-en="Our Services">Unsere Leistungen</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 text-left max-w-4xl mx-auto">
+              <div>
+                <h3 class="text-lg md:text-xl font-bold mb-2" data-de="Dachinstallation" data-en="Roof Installation">Dachinstallation</h3>
+                <p class="text-sm opacity-70 font-light" data-de="Komplette Neuinstallationen mit hochwertigen Materialien." data-en="Complete new installations with premium materials.">Komplette Neuinstallationen mit hochwertigen Materialien.</p>
+              </div>
+              <div>
+                <h3 class="text-lg md:text-xl font-bold mb-2" data-de="Dachreparatur" data-en="Roof Repair">Dachreparatur</h3>
+                <p class="text-sm opacity-70 font-light" data-de="Schnelle Reparaturen zum Schutz vor Wettersch&auml;den." data-en="Fast repairs to protect against weather damage.">Schnelle Reparaturen zum Schutz vor Wettersch&auml;den.</p>
+              </div>
+              <div>
+                <h3 class="text-lg md:text-xl font-bold mb-2" data-de="Hausrenovierung" data-en="Home Renovation">Hausrenovierung</h3>
+                <p class="text-sm opacity-70 font-light" data-de="Komplettrenovierungen vom Fundament bis zum Dach." data-en="Full renovations from foundation to rooftop.">Komplettrenovierungen vom Fundament bis zum Dach.</p>
+              </div>
+              <div>
+                <h3 class="text-lg md:text-xl font-bold mb-2" data-de="Inspektion" data-en="Inspection">Inspektion</h3>
+                <p class="text-sm opacity-70 font-light" data-de="Gr&uuml;ndliche Dachinspektionen und fachkundige Beratung." data-en="Thorough inspections and expert consulting.">Gr&uuml;ndliche Dachinspektionen und fachkundige Beratung.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="px-4 md:px-6 mb-8 md:mb-12">
+      <div class="max-w-[1200px] mx-auto">
         <div class="project-card">
-          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop" alt="Modern Home" loading="lazy">
-          <div class="project-info">
-            <h3 data-en="Modern Villa Roofing" data-de="Moderne Villa Bedachung">Modern Villa Roofing</h3>
-            <span data-en="Residential" data-de="Wohnbau">Residential</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&h=600&fit=crop" alt="Luxury Home" loading="lazy">
-          <div class="project-info">
-            <h3 data-en="Luxury Home Renovation" data-de="Luxushaus Renovierung">Luxury Home Renovation</h3>
-            <span data-en="Renovation" data-de="Renovierung">Renovation</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop" alt="Suburban Home" loading="lazy">
-          <div class="project-info">
-            <h3 data-en="Suburban Roof Replacement" data-de="Vorstadtdach Erneuerung">Suburban Roof Replacement</h3>
-            <span data-en="Replacement" data-de="Erneuerung">Replacement</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&h=600&fit=crop" alt="Estate" loading="lazy">
-          <div class="project-info">
-            <h3 data-en="Country Estate Restoration" data-de="Landsitz Restaurierung">Country Estate Restoration</h3>
-            <span data-en="Restoration" data-de="Restaurierung">Restoration</span>
+          <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1600&h=800&fit=crop" alt="About" class="card-img" loading="lazy">
+          <div class="card-overlay"></div>
+          <div class="card-text">
+            <h2 class="card-title hero-title mb-6" data-de="&Uuml;ber Uns" data-en="About Us">&Uuml;ber Uns</h2>
+            <p class="max-w-xl mx-auto text-base md:text-lg font-light opacity-85 mb-8" data-de="Mit &uuml;ber 20 Jahren Erfahrung ist All Style Roofing Ihr verl&auml;sslicher Partner f&uuml;r Dach- und Wohnl&ouml;sungen. Unser Team zertifizierter Fachleute liefert bei jedem Projekt hervorragende Ergebnisse." data-en="With over 20 years of experience, All Style Roofing is your trusted partner for roofing and housing solutions. Our team of certified professionals delivers exceptional results on every project.">Mit &uuml;ber 20 Jahren Erfahrung ist All Style Roofing Ihr verl&auml;sslicher Partner f&uuml;r Dach- und Wohnl&ouml;sungen. Unser Team zertifizierter Fachleute liefert bei jedem Projekt hervorragende Ergebnisse.</p>
+            <div class="flex justify-center gap-12 md:gap-16">
+              <div class="text-center">
+                <span class="block text-3xl md:text-4xl font-black">500+</span>
+                <span class="text-sm opacity-60" data-de="Projekte" data-en="Projects">Projekte</span>
+              </div>
+              <div class="text-center">
+                <span class="block text-3xl md:text-4xl font-black">20+</span>
+                <span class="text-sm opacity-60" data-de="Jahre" data-en="Years">Jahre</span>
+              </div>
+              <div class="text-center">
+                <span class="block text-3xl md:text-4xl font-black">100%</span>
+                <span class="text-sm opacity-60" data-de="Zufriedenheit" data-en="Satisfaction">Zufriedenheit</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- About -->
-  <section class="about" id="about">
-    <div class="container about-grid">
-      <div class="about-image">
-        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=600&fit=crop" alt="About Us" loading="lazy">
-      </div>
-      <div class="about-text">
-        <h2 data-en="About Us" data-de="&Uuml;ber Uns">About Us</h2>
-        <p data-en="With over 20 years of experience, All Style Roofing is your trusted partner for roofing and housing solutions. Our team of certified professionals delivers exceptional results on every project." data-de="Mit &uuml;ber 20 Jahren Erfahrung ist All Style Roofing Ihr verl&auml;sslicher Partner f&uuml;r Dach- und Wohnl&ouml;sungen. Unser Team zertifizierter Fachleute liefert bei jedem Projekt hervorragende Ergebnisse.">With over 20 years of experience, All Style Roofing is your trusted partner for roofing and housing solutions. Our team of certified professionals delivers exceptional results on every project.</p>
-        <div class="stats">
-          <div class="stat"><strong>500+</strong><span data-en="Projects" data-de="Projekte">Projects</span></div>
-          <div class="stat"><strong>20+</strong><span data-en="Years" data-de="Jahre">Years</span></div>
-          <div class="stat"><strong>100%</strong><span data-en="Satisfaction" data-de="Zufriedenheit">Satisfaction</span></div>
+    <!-- Contact -->
+    <section id="contact" class="px-4 md:px-6 mb-8 md:mb-12">
+      <div class="max-w-[1200px] mx-auto">
+        <div class="project-card contact-card">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&h=800&fit=crop" alt="Contact" class="card-img" loading="lazy">
+          <div class="card-overlay dark-overlay"></div>
+          <div class="card-text">
+            <h2 class="card-title hero-title mb-8" data-de="Kontakt" data-en="Contact">Kontakt</h2>
+            <form class="max-w-md mx-auto flex flex-col gap-4" onsubmit="event.preventDefault()">
+              <input type="text" class="form-input" data-placeholder-de="Ihr Name" data-placeholder-en="Your Name" placeholder="Ihr Name" required>
+              <input type="email" class="form-input" data-placeholder-de="Ihre E-Mail" data-placeholder-en="Your Email" placeholder="Ihre E-Mail" required>
+              <textarea rows="4" class="form-input" data-placeholder-de="Ihre Nachricht" data-placeholder-en="Your Message" placeholder="Ihre Nachricht" required></textarea>
+              <button type="submit" class="form-btn" data-de="Nachricht Senden" data-en="Send Message">Nachricht Senden</button>
+            </form>
+            <div class="mt-8 text-sm opacity-70 space-y-1">
+              <p>+49 30 1234 5678</p>
+              <p>info@allstyleroofing.com</p>
+              <p>123 Roofing Street, Berlin 10115</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <h2 data-en="Get in Touch" data-de="Kontaktieren Sie Uns">Get in Touch</h2>
-      <div class="contact-grid">
-        <form class="contact-form" onsubmit="event.preventDefault()">
-          <input type="text" data-placeholder-en="Your Name" data-placeholder-de="Ihr Name" placeholder="Your Name" required>
-          <input type="email" data-placeholder-en="Your Email" data-placeholder-de="Ihre E-Mail" placeholder="Your Email" required>
-          <textarea rows="5" data-placeholder-en="Your Message" data-placeholder-de="Ihre Nachricht" placeholder="Your Message" required></textarea>
-          <button type="submit" class="btn" data-en="Send Message" data-de="Nachricht Senden">Send Message</button>
-        </form>
-        <div class="contact-info">
-          <div class="info-item">
-            <h4 data-en="Address" data-de="Adresse">Address</h4>
-            <p>123 Roofing Street<br>Berlin, 10115</p>
-          </div>
-          <div class="info-item">
-            <h4 data-en="Phone" data-de="Telefon">Phone</h4>
-            <p>+49 30 1234 5678</p>
-          </div>
-          <div class="info-item">
-            <h4>Email</h4>
-            <p>info@allstyleroofing.com</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-content">
-      <p>&copy; 2026 All Style Roofing. <span data-en="All rights reserved." data-de="Alle Rechte vorbehalten.">All rights reserved.</span></p>
-      <a href="#" data-en="Imprint" data-de="Impressum">Imprint</a>
+  <footer class="footer-section">
+    <div class="footer-inner">
+      <div class="logo-btn footer-logo">
+        <span class="logo-text text-black">All Style<br>Roofing</span>
+      </div>
+      <div class="footer-links">
+        <a href="#projects" class="hover-scale" data-de="Projekte" data-en="Projects">Projekte</a>
+        <a href="#services" class="hover-scale" data-de="Leistungen" data-en="Services">Leistungen</a>
+        <a href="#about" class="hover-scale" data-de="&Uuml;ber Uns" data-en="About Us">&Uuml;ber Uns</a>
+        <a href="#contact" class="hover-scale" data-de="Kontakt" data-en="Contact">Kontakt</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 All Style Roofing. <span data-de="Alle Rechte vorbehalten." data-en="All rights reserved.">Alle Rechte vorbehalten.</span></p>
     </div>
   </footer>
 
