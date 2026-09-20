@@ -20,10 +20,53 @@ html { scroll-behavior: smooth; }
 .logo-btn {
   pointer-events: all;
   cursor: pointer;
-  background: none;
   border: none;
   color: inherit;
   text-align: center;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.sticky-logo .logo-btn,
+#navOverlay .logo-btn {
+  background: #000;
+  padding: 0.5rem;
+  width: clamp(140px, 22vw, 220px);
+  height: clamp(60px, 8vw, 82px);
+}
+
+.logo-mark {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  background: transparent;
+}
+
+.logo-mark-light {
+  filter: brightness(0) invert(1);
+}
+
+.footer-logo {
+  background: transparent;
+  width: auto;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+}
+
+.footer-logo-mark {
+  width: clamp(160px, 28vw, 260px);
+  height: auto;
+  max-height: 100%;
+  background: transparent;
+  filter: none;
 }
 
 .logo-text {
@@ -241,14 +284,51 @@ a.project-card:hover .card-title {
   color: #000;
 }
 
+.contact-text {
+  width: min(92%, 920px);
+}
+
+.contact-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.contact-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 1rem 1.1rem;
+  text-align: left;
+  backdrop-filter: blur(4px);
+}
+
+.contact-pill .contact-label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 0.4rem;
+}
+
+.contact-pill a,
+.contact-pill span {
+  color: #fff;
+  text-decoration: none;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  line-height: 1.5;
+}
+
 /* Footer - white background like Walker Worm */
 .footer-section {
   background: #fff;
   color: #000;
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 0.75rem;
   position: relative;
   z-index: 1;
 }
@@ -258,10 +338,179 @@ a.project-card:hover .card-title {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1;
-  gap: 2rem;
-  mix-blend-mode: difference;
-  color: #fff;
+  gap: 1.25rem;
+  color: #000;
+  mix-blend-mode: normal;
+}
+
+@media (max-width: 768px) {
+  .sticky-logo {
+    padding: 0.75rem;
+  }
+
+  .nav-overlay-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .nav-menu {
+    gap: 0.15em;
+  }
+
+  .nav-link {
+    font-size: clamp(1.4rem, 8vw, 2.5rem);
+  }
+
+  .card-text {
+    width: 88%;
+    max-width: 90%;
+    top: 50%;
+  }
+
+  .card-title {
+    font-size: clamp(1.1rem, 6vw, 1.8rem);
+  }
+
+  .hero-title {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+
+  .card-img {
+    min-height: 45vw;
+  }
+
+  .hero-card .card-img {
+    min-height: 64vh;
+  }
+
+  .service-banner {
+    min-height: auto;
+  }
+
+  .service-banner .card-img {
+    min-height: 74vh;
+  }
+
+  .service-banner .card-text {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    transform: none;
+    padding: 1rem 0.85rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .service-banner .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: none;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .service-banner .card-title {
+    font-size: clamp(1.6rem, 7vw, 2.4rem);
+    line-height: 1.05;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-banner h3 {
+    font-size: clamp(1.2rem, 4.8vw, 1.7rem);
+    line-height: 1.15;
+    margin-bottom: 0.3rem;
+  }
+
+  .service-banner p,
+  .service-banner .text-sm {
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  .contact-card .card-img {
+    min-height: 66vh;
+  }
+
+  .footer-section {
+    min-height: auto;
+    padding: 1rem 0.75rem 0.75rem;
+  }
+
+  .footer-inner {
+    gap: 0.85rem;
+    justify-content: flex-start;
+    min-height: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0;
+  }
+
+  .footer-links {
+    gap: 0.8rem 1rem;
+  }
+
+  .footer-copy {
+    margin-top: 0;
+  }
+
+  .contact-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding-bottom: 0.5rem;
+  }
+
+  .project-card,
+  .footer-section {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .hero-card .card-img,
+  .service-banner .card-img,
+  .contact-card .card-img,
+  .project-card .card-img {
+    min-height: 42vh;
+  }
+
+  .service-banner .card-text {
+    padding: 0.75rem 0.7rem 1rem;
+  }
+
+  .service-banner .card-title {
+    font-size: clamp(1.35rem, 7.5vw, 1.8rem);
+    line-height: 1.08;
+    margin-bottom: 0.55rem;
+  }
+
+  .service-banner h3 {
+    font-size: clamp(1.05rem, 5vw, 1.35rem);
+    line-height: 1.15;
+    margin-bottom: 0.2rem;
+  }
+
+  .service-banner p,
+  .service-banner .text-sm {
+    font-size: 0.76rem;
+    line-height: 1.35;
+  }
+
+  .card-title,
+  .hero-title,
+  .form-btn,
+  .nav-link,
+  .footer-links {
+    letter-spacing: -0.02em;
+  }
+
+  .footer-section {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }
 
 .footer-logo {
