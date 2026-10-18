@@ -7,8 +7,19 @@ const menuToggle = document.getElementById('menuToggle');
 const menuClose = document.getElementById('menuClose');
 
 // Toggle nav overlay
-function openNav() { overlay.classList.add('is-open'); document.body.style.overflow = 'hidden'; }
-function closeNav() { overlay.classList.remove('is-open'); document.body.style.overflow = ''; }
+function openNav() {
+  overlay.classList.add('is-open');
+  menuToggle.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+  menuClose.focus();
+}
+function closeNav() {
+  if (!overlay.classList.contains('is-open')) return;
+  overlay.classList.remove('is-open');
+  menuToggle.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+  menuToggle.focus({ preventScroll: true });
+}
 
 menuToggle.addEventListener('click', openNav);
 menuClose.addEventListener('click', closeNav);
@@ -31,12 +42,24 @@ function setLang(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
   langSwitchNav.textContent = lang === 'de' ? 'English' : 'Deutsch';
+  langSwitchNav.lang = lang === 'de' ? 'en' : 'de';
+  menuToggle.setAttribute('aria-label', lang === 'de' ? 'Menü' : 'Menu');
+  menuClose.setAttribute('aria-label', lang === 'de' ? 'Schließen' : 'Close');
+  updateCounts();
 
   document.querySelectorAll('[data-de]').forEach(el => {
     el.innerHTML = el.getAttribute(`data-${lang}`);
   });
   document.querySelectorAll('[data-placeholder-de]').forEach(el => {
     el.placeholder = el.getAttribute(`data-placeholder-${lang}`);
+  });
+}
+
+function updateCounts() {
+  document.querySelectorAll('.gallery-trigger').forEach(card => {
+    const n = JSON.parse(card.dataset.gallery).length;
+    card.dataset.count = `${n} ${currentLang === 'de' ? 'Fotos' : 'photos'}`;
+    card.setAttribute('aria-label', `${card.getAttribute(`data-title-${currentLang}`)} – ${card.dataset.count}`);
   });
 }
 
@@ -55,16 +78,42 @@ const galleryClose = document.getElementById('galleryClose');
 const galleryPrev = document.getElementById('galleryPrev');
 const galleryNext = document.getElementById('galleryNext');
 
+const smallScreen = window.matchMedia('(max-width: 767px)');
+
+// Mobile gets the 960px variant, desktop the full 1920px image
+function imageSrc(path) {
+  return smallScreen.matches ? path.replace(/\.webp$/, '-sm.webp') : path;
+}
+
+function preloadSlide(index) {
+  if (index < 0 || index >= galleryImages.length) return;
+  const img = new Image();
+  img.decoding = 'async';
+  img.src = imageSrc(galleryImages[index]);
+}
+
+function setSlide(index) {
+  galleryIndex = index;
+  galleryImg.src = imageSrc(galleryImages[index]);
+  galleryCurrent.textContent = index + 1;
+  updateDots();
+  preloadSlide(index + 1);
+  preloadSlide(index - 1);
+}
+
 let galleryOpen = false;
+let lastFocus = null;
 let galleryImages = [];
 let galleryIndex = 0;
 
 function openGallery(trigger) {
+  lastFocus = trigger;
   galleryImages = JSON.parse(trigger.dataset.gallery);
   galleryIndex = 0;
 
   const titleKey = `data-title-${currentLang}`;
   galleryTitle.textContent = trigger.getAttribute(titleKey);
+  galleryImg.alt = galleryTitle.textContent;
 
   galleryTotal.textContent = galleryImages.length;
   renderDots();
@@ -74,6 +123,7 @@ function openGallery(trigger) {
   gallery.classList.add('is-open');
   document.body.style.overflow = 'hidden';
   galleryOpen = true;
+  galleryClose.focus({ preventScroll: true });
 }
 
 function closeGallery() {
@@ -84,6 +134,7 @@ function closeGallery() {
   setTimeout(() => {
     gallery.classList.remove('is-closing');
     document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus({ preventScroll: true });
   }, 400);
 }
 
@@ -96,10 +147,7 @@ function showSlide(index, direction) {
     galleryImg.classList.add(slideClass);
 
     setTimeout(() => {
-      galleryIndex = index;
-      galleryImg.src = galleryImages[index];
-      galleryCurrent.textContent = index + 1;
-      updateDots();
+      setSlide(index);
       // Slide in from opposite side
       galleryImg.classList.remove(slideClass);
       const enterClass = direction === 'left' ? 'is-sliding-right' : 'is-sliding-left';
@@ -113,10 +161,7 @@ function showSlide(index, direction) {
     }, 250);
   } else {
     // Initial load — no animation
-    galleryIndex = index;
-    galleryImg.src = galleryImages[index];
-    galleryCurrent.textContent = index + 1;
-    updateDots();
+    setSlide(index);
   }
 }
 
@@ -146,6 +191,12 @@ document.querySelectorAll('.gallery-trigger').forEach(card => {
     e.preventDefault();
     openGallery(card);
   });
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openGallery(card);
+    }
+  });
 });
 
 galleryClose.addEventListener('click', closeGallery);
@@ -157,6 +208,8 @@ galleryPrev.addEventListener('click', () => {
 galleryNext.addEventListener('click', () => {
   if (galleryIndex < galleryImages.length - 1) showSlide(galleryIndex + 1, 'left');
 });
+
+updateCounts();
 
 // Keyboard navigation
 document.addEventListener('keydown', e => {
@@ -194,3 +247,13 @@ gallery.addEventListener('touchend', e => {
     showSlide(galleryIndex - 1, 'right');
   }
 }, { passive: true });
+
+
+// ===== Lazy-loaded card images: fade in once decoded =====
+document.querySelectorAll('img.card-img[loading="lazy"]').forEach(img => {
+  if (img.complete) return;
+  img.classList.add('is-pending');
+  const done = () => img.classList.remove('is-pending');
+  img.addEventListener('load', done, { once: true });
+  img.addEventListener('error', done, { once: true });
+});

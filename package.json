@@ -1,0 +1,23 @@
+{
+  "name": "all-style-roofing",
+  "version": "1.0.0",
+  "description": "All Style Roofing website",
+  "scripts": {
+    "build": "tailwindcss -c tailwind.config.js -i src/input.css -o dist/styles.css --minify",
+    "watch": "tailwindcss -c tailwind.config.js -i src/input.css -o dist/styles.css --watch",
+    "serve": "python3 -m http.server 8123 --bind 127.0.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mannyacquah/all-style-roofing.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mannyacquah/all-style-roofing/issues"
+  },
+  "homepage": "https://github.com/mannyacquah/all-style-roofing#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  },
+  "private": true
+}
