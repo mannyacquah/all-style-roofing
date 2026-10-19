@@ -10,16 +10,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="/img/site/hero-960.webp" imagesrcset="/img/site/hero-960.webp 960w, /img/site/hero.webp 1920w" imagesizes="100vw" fetchpriority="high">
-  <link rel="stylesheet" href="/dist/styles.css?v=20261018-2">
+  <link rel="stylesheet" href="/dist/styles.css?v=20261019-1">
 </head>
 <body id="top" class="bg-black text-white font-sans antialiased overflow-x-hidden">
 
   <a href="#main" class="skip-link" data-de="Zum Inhalt springen" data-en="Skip to content">Zum Inhalt springen</a>
 
+  <div class="header-scrim" aria-hidden="true"></div>
   <header class="site-header">
-    <a href="#top" class="site-logo" aria-label="All Style Roofing">
+    <button type="button" id="logoToggle" class="site-logo" aria-label="Menü" aria-controls="navOverlay">
       <img src="/img/logo-white.webp" alt="All Style Roofing – MMK Dachbau GmbH" width="900" height="269">
-    </a>
+    </button>
     <button id="menuToggle" class="menu-btn" aria-label="Menü" aria-expanded="false" aria-controls="navOverlay" data-label-de="Menü" data-label-en="Menu">
       <span class="menu-icon" aria-hidden="true"></span>
       <span data-de="Menü" data-en="Menu">Menü</span>
@@ -356,10 +357,6 @@
                 <p class="service-desc" data-de="Schnelle Reparaturen zum Schutz vor Wettersch&auml;den." data-en="Fast repairs to protect against weather damage.">Schnelle Reparaturen zum Schutz vor Wettersch&auml;den.</p>
               </div>
               <div class="service-item">
-                <h3 data-de="Hausrenovierung" data-en="Home Renovation">Hausrenovierung</h3>
-                <p class="service-desc" data-de="Komplettrenovierungen vom Fundament bis zum Dach." data-en="Full renovations from foundation to rooftop.">Komplettrenovierungen vom Fundament bis zum Dach.</p>
-              </div>
-              <div class="service-item">
                 <h3 data-de="Inspektion" data-en="Inspection">Inspektion</h3>
                 <p class="service-desc" data-de="Gr&uuml;ndliche Dachinspektionen und fachkundige Beratung." data-en="Thorough inspections and expert consulting.">Gr&uuml;ndliche Dachinspektionen und fachkundige Beratung.</p>
               </div>
@@ -461,6 +458,6 @@
     <div class="gallery-dots" id="galleryDots"></div>
   </div>
 
-  <script src="script.js?v=20261018-2" defer></script>
+  <script src="script.js?v=20261019-1" defer></script>
 </body>
 </html>
