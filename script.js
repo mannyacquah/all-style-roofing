@@ -22,6 +22,7 @@ function closeNav() {
 }
 
 menuToggle.addEventListener('click', openNav);
+document.getElementById('logoToggle').addEventListener('click', openNav);
 menuClose.addEventListener('click', closeNav);
 
 overlay.querySelectorAll('a').forEach(a => {
@@ -44,6 +45,7 @@ function setLang(lang) {
   langSwitchNav.textContent = lang === 'de' ? 'English' : 'Deutsch';
   langSwitchNav.lang = lang === 'de' ? 'en' : 'de';
   menuToggle.setAttribute('aria-label', lang === 'de' ? 'Menü' : 'Menu');
+  document.getElementById('logoToggle').setAttribute('aria-label', lang === 'de' ? 'Menü' : 'Menu');
   menuClose.setAttribute('aria-label', lang === 'de' ? 'Schließen' : 'Close');
   updateCounts();
 
